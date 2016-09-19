@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Lesson13;
+using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
@@ -10,7 +11,7 @@ using System.Xml.Linq;
 
 namespace lesson13
 {
-    class Weather
+    class Weather : IWeather
     {
         private const string AppId = "0949ad752887b4deeaf01429a455e7ed";
         public XmlDocument  GetCurrentWeather(string city)
