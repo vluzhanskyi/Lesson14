@@ -14,19 +14,19 @@ namespace lesson13
         static void Main(string[] args)
         {
             Weather w = new Weather();
-            w.GetCurrentWeather("Chicago");
-            w.GetForeCustWeather("Chicago");          
+          //  w.GetCurrentWeather("Chicago");
+            var result = w.GetForeCustWeather("Chicago");
         }
 
-        void CreateService()
+       static void CreateService()
         {
             ServiceHost host = new ServiceHost(typeof(Weather));
             BasicHttpBinding binding = new BasicHttpBinding();
-            host.AddServiceEndpoint(typeof(IWeather), binding, "http://localhost:8585/WeatherService");
+            host.AddServiceEndpoint(typeof(IWeather), binding, "http://localhost:8585/Weather");
             host.Open();
         }
 
-        void ShareMetedata()
+        static void ShareMetedata()
         {
             ServiceMetadataBehavior mdb = new ServiceMetadataBehavior();
             mdb.HttpGetUrl = new Uri("http://localhost:8585/Weather");

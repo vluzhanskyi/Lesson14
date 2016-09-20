@@ -14,7 +14,7 @@ namespace Lesson13
         [OperationContract]
         XmlDocument GetCurrentWeather(string city);
         [OperationContract]
-        XmlDocument GetForeCustWeather(string city);
+        WeatherForcust GetForeCustWeather(string city);
 
     }
 }
