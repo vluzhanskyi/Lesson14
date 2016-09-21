@@ -1,11 +1,7 @@
 ﻿using Lesson13;
 using System;
-using System.Collections.Generic;
-using System.Linq;
 using System.ServiceModel;
 using System.ServiceModel.Description;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace lesson13
 {
@@ -15,23 +11,21 @@ namespace lesson13
         {
             Weather w = new Weather();
           //  w.GetCurrentWeather("Chicago");
-            var result = w.GetForeCustWeather("Chicago");
+            var result = w.GetForeCustWeather("Kiev");
+            Console.ReadLine();
         }
 
        static void CreateService()
         {
-            ServiceHost host = new ServiceHost(typeof(Weather));
+            ServiceHost host = new ServiceHost(typeof(Weather), new Uri("http://localhost:8585/"));
             BasicHttpBinding binding = new BasicHttpBinding();
+            ServiceMetadataBehavior mdb = new ServiceMetadataBehavior
+            {
+                HttpGetUrl = new Uri("http://localhost:8585/Weather"),
+                HttpsGetEnabled = true
+            };
             host.AddServiceEndpoint(typeof(IWeather), binding, "http://localhost:8585/Weather");
             host.Open();
         }
-
-        static void ShareMetedata()
-        {
-            ServiceMetadataBehavior mdb = new ServiceMetadataBehavior();
-            mdb.HttpGetUrl = new Uri("http://localhost:8585/Weather");
-            mdb.HttpsGetEnabled = true;
-        }
-
     }
 }
