@@ -9,22 +9,32 @@ namespace lesson13
     {
         static void Main(string[] args)
         {
-            Weather w = new Weather();
-          //  w.GetCurrentWeather("Chicago");
-            var result = w.GetForeCustWeather("Kiev");
+            WeatherService w = new WeatherService();
+          //  var FcResult = w.GetForeCustWeather("Kiev");
+           // var CurrentResult = w.GetCurrentWeather("Kiev");
+            CreateService();
             Console.ReadLine();
         }
 
-       static void CreateService()
+        private static void CreateService()
         {
-            ServiceHost host = new ServiceHost(typeof(Weather), new Uri("http://localhost:8585/"));
+            ServiceHost host = new ServiceHost(typeof(WeatherService));
             BasicHttpBinding binding = new BasicHttpBinding();
             ServiceMetadataBehavior mdb = new ServiceMetadataBehavior
             {
                 HttpGetUrl = new Uri("http://localhost:8585/Weather"),
-                HttpsGetEnabled = true
+                HttpGetEnabled = true
+                
             };
-            host.AddServiceEndpoint(typeof(IWeather), binding, "http://localhost:8585/Weather");
+           
+            var debug = host.Description.Behaviors.Find<ServiceDebugBehavior>();
+           debug.IncludeExceptionDetailInFaults = true;
+           
+           host.Description.Behaviors.Add(mdb);
+
+           
+            host.AddServiceEndpoint(typeof(IWeatherService), binding, "http://localhost:8585/Weather");
+           
             host.Open();
         }
     }
