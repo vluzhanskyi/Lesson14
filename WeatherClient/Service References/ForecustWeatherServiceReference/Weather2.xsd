@@ -3,11 +3,17 @@
   <xs:complexType name="WeatherForecust">
     <xs:sequence>
       <xs:element minOccurs="0" name="CityName" nillable="true" type="xs:string" />
-      <xs:element minOccurs="0" name="CurrentWeather" nillable="true" type="tns:ForeCast" />
+      <xs:element minOccurs="0" name="CurrentWeather" nillable="true" type="tns:ArrayOfForeCast" />
       <xs:element minOccurs="0" name="Forecast" nillable="true" type="tns:ArrayOfForeCast" />
     </xs:sequence>
   </xs:complexType>
   <xs:element name="WeatherForecust" nillable="true" type="tns:WeatherForecust" />
+  <xs:complexType name="ArrayOfForeCast">
+    <xs:sequence>
+      <xs:element minOccurs="0" maxOccurs="unbounded" name="ForeCast" nillable="true" type="tns:ForeCast" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="ArrayOfForeCast" nillable="true" type="tns:ArrayOfForeCast" />
   <xs:complexType name="ForeCast">
     <xs:sequence>
       <xs:element minOccurs="0" name="CloudsValue" nillable="true" type="xs:string" />
@@ -34,12 +40,6 @@
     </xs:sequence>
   </xs:complexType>
   <xs:element name="Precipitation" nillable="true" type="tns:Precipitation" />
-  <xs:complexType name="ArrayOfForeCast">
-    <xs:sequence>
-      <xs:element minOccurs="0" maxOccurs="unbounded" name="ForeCast" nillable="true" type="tns:ForeCast" />
-    </xs:sequence>
-  </xs:complexType>
-  <xs:element name="ArrayOfForeCast" nillable="true" type="tns:ArrayOfForeCast" />
   <xs:complexType name="ForcustItem">
     <xs:sequence>
       <xs:element minOccurs="0" name="CityName" nillable="true" type="xs:string" />

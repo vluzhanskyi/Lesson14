@@ -1,4 +1,6 @@
 ﻿using System;
+using System.Collections;
+using System.Collections.Generic;
 using System.Collections.Specialized;
 using System.Linq;
 using System.Runtime.Caching;
@@ -6,6 +8,7 @@ using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Forms;
 using WeatherClient.ForecustWeatherServiceReference;
+using WeatherService;
 
 namespace WeatherClient
 {
@@ -49,13 +52,33 @@ namespace WeatherClient
                 var cacheItem = item.Value;
                     ResultForecust = (WeatherForecust) cacheItem;
             }
-          //  WeatherForeCustDataGrid.ItemsSource = ResultForecust.CurrentWeather;
-            WeatherForeCustDataGrid.ItemsSource = ResultForecust.Forecast;
+            CurrenWeatherDataGrid.ItemsSource = CollectWeatherData(ResultForecust.CurrentWeather);
+            WeatherForeCustDataGrid.ItemsSource = CollectWeatherData(ResultForecust.Forecast);
+        }
+
+        private List<WeatherData> CollectWeatherData(ForeCast[] forecust)
+        {
+            var result = new List<WeatherData>();
+            foreach (var item in forecust)
+            {
+                WeatherData data = new WeatherData();
+                data.CloudsValue = item.CloudsValue;
+                data.DataFrom = item.Data.From;
+                data.DataTo = item.Data.To;
+                data.Humidity = item.Humidity;
+                data.PrecipitationType = item.Precipitation.Type;
+                data.PrecipitationValue = item.Precipitation.Value;
+                data.Pressure = item.Pressure;
+                data.WindSpeed = item.WindSpeed;
+                data.Temperature = item.Temperature;
+                result.Add(data);
+            }
+            return result;
         }
 
         private void DataGrid_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
-
+            
         }
 
         private void CurrenWeatherDataGrid_AddingNewItem(object sender, AddingNewItemEventArgs e)

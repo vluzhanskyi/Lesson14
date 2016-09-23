@@ -10,8 +10,8 @@ namespace WeatherService
         static void Main(string[] args)
         {
             var w = new WeatherService();
-           //  var FcResult = w.GetForeCustWeather("Kiev");
-           // var CurrentResult = w.GetCurrentWeather("Kiev");
+             var FcResult = w.GetForeCustWeather("Kiev");
+            var CurrentResult = w.GetCurrentWeather("Kiev");
             CreateService();
             Console.ReadLine();
         }
@@ -20,6 +20,7 @@ namespace WeatherService
         {
             ServiceHost host = new ServiceHost(typeof(WeatherService));
             BasicHttpBinding binding = new BasicHttpBinding();
+            binding.CloseTimeout = TimeSpan.MaxValue;
             ServiceMetadataBehavior mdb = new ServiceMetadataBehavior
             {
                 HttpGetUrl = new Uri("http://localhost:8585/Weather"),

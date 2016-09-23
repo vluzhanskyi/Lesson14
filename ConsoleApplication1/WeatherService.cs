@@ -20,7 +20,7 @@ namespace WeatherService
             var temp = GetCurrentWeather(city);
             var result = new WeatherForecust
             {
-                CurrentWeather = temp.Forecast.First(),
+                CurrentWeather = temp.Forecast,
                 CityName = temp.CityName,
                 Forecast = GetForeCustWeather(city).Forecast
             };
@@ -153,7 +153,7 @@ namespace WeatherService
                 result.Pressure = float.Parse(pressure.Value, CultureInfo.InvariantCulture.NumberFormat);
             }
             if (precipitation == null || !precipitation.Attributes().Any()) return result;
-            result.Precipitation.Value = float.Parse(precipitation.Attribute("value").Value);
+            result.Precipitation.Value = float.Parse(precipitation.Attribute("value").Value, CultureInfo.InvariantCulture.NumberFormat);
             result.Precipitation.Type = precipitation.Attribute("type").Value;
             return result;
         }

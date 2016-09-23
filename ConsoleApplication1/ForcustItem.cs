@@ -15,7 +15,7 @@ namespace WeatherService
         [DataMember]
         public List<ForeCast> Forecast = new List<ForeCast>();
         [DataMember]
-        public ForeCast CurrentWeather = new ForeCast();
+        public List<ForeCast> CurrentWeather = new List<ForeCast>();
     }
      [DataContract]
     public class ForcustItem

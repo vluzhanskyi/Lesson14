@@ -26,7 +26,7 @@ namespace WeatherClient.ForecustWeatherServiceReference {
         private string CityNameField;
         
         [System.Runtime.Serialization.OptionalFieldAttribute()]
-        private WeatherClient.ForecustWeatherServiceReference.ForeCast CurrentWeatherField;
+        private WeatherClient.ForecustWeatherServiceReference.ForeCast[] CurrentWeatherField;
         
         [System.Runtime.Serialization.OptionalFieldAttribute()]
         private WeatherClient.ForecustWeatherServiceReference.ForeCast[] ForecastField;
@@ -55,7 +55,7 @@ namespace WeatherClient.ForecustWeatherServiceReference {
         }
         
         [System.Runtime.Serialization.DataMemberAttribute()]
-        public WeatherClient.ForecustWeatherServiceReference.ForeCast CurrentWeather {
+        public WeatherClient.ForecustWeatherServiceReference.ForeCast[] CurrentWeather {
             get {
                 return this.CurrentWeatherField;
             }
