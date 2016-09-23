@@ -15,7 +15,7 @@ namespace WeatherClient.ForecustWeatherServiceReference {
     
     [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Runtime.Serialization", "4.0.0.0")]
-    [System.Runtime.Serialization.DataContractAttribute(Name="WeatherForecust", Namespace="http://schemas.datacontract.org/2004/07/Lesson13")]
+    [System.Runtime.Serialization.DataContractAttribute(Name="WeatherForecust", Namespace="http://schemas.datacontract.org/2004/07/WeatherService")]
     [System.SerializableAttribute()]
     public partial class WeatherForecust : object, System.Runtime.Serialization.IExtensibleDataObject, System.ComponentModel.INotifyPropertyChanged {
         
@@ -92,7 +92,7 @@ namespace WeatherClient.ForecustWeatherServiceReference {
     
     [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Runtime.Serialization", "4.0.0.0")]
-    [System.Runtime.Serialization.DataContractAttribute(Name="ForeCast", Namespace="http://schemas.datacontract.org/2004/07/Lesson13")]
+    [System.Runtime.Serialization.DataContractAttribute(Name="ForeCast", Namespace="http://schemas.datacontract.org/2004/07/WeatherService")]
     [System.SerializableAttribute()]
     public partial class ForeCast : object, System.Runtime.Serialization.IExtensibleDataObject, System.ComponentModel.INotifyPropertyChanged {
         
@@ -233,7 +233,7 @@ namespace WeatherClient.ForecustWeatherServiceReference {
     
     [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Runtime.Serialization", "4.0.0.0")]
-    [System.Runtime.Serialization.DataContractAttribute(Name="Data", Namespace="http://schemas.datacontract.org/2004/07/Lesson13")]
+    [System.Runtime.Serialization.DataContractAttribute(Name="Data", Namespace="http://schemas.datacontract.org/2004/07/WeatherService")]
     [System.SerializableAttribute()]
     public partial class Data : object, System.Runtime.Serialization.IExtensibleDataObject, System.ComponentModel.INotifyPropertyChanged {
         
@@ -294,7 +294,7 @@ namespace WeatherClient.ForecustWeatherServiceReference {
     
     [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Runtime.Serialization", "4.0.0.0")]
-    [System.Runtime.Serialization.DataContractAttribute(Name="Precipitation", Namespace="http://schemas.datacontract.org/2004/07/Lesson13")]
+    [System.Runtime.Serialization.DataContractAttribute(Name="Precipitation", Namespace="http://schemas.datacontract.org/2004/07/WeatherService")]
     [System.SerializableAttribute()]
     public partial class Precipitation : object, System.Runtime.Serialization.IExtensibleDataObject, System.ComponentModel.INotifyPropertyChanged {
         
@@ -355,7 +355,7 @@ namespace WeatherClient.ForecustWeatherServiceReference {
     
     [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Runtime.Serialization", "4.0.0.0")]
-    [System.Runtime.Serialization.DataContractAttribute(Name="ForcustItem", Namespace="http://schemas.datacontract.org/2004/07/Lesson13")]
+    [System.Runtime.Serialization.DataContractAttribute(Name="ForcustItem", Namespace="http://schemas.datacontract.org/2004/07/WeatherService")]
     [System.SerializableAttribute()]
     public partial class ForcustItem : object, System.Runtime.Serialization.IExtensibleDataObject, System.ComponentModel.INotifyPropertyChanged {
         

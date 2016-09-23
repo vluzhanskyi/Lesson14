@@ -14,12 +14,12 @@ namespace WeatherClient
     /// </summary>
     public partial class MainWindow : Window
     {
-        private readonly IWeatherService _weatherService;
         private readonly MemoryCache _cache;
+        public WeatherForecust ResultForecust { set; get; }
+
         public MainWindow()
         {
             InitializeComponent();
-            _weatherService = new WeatherServiceClient();
             _cache = new MemoryCache("test", new NameValueCollection());
         }
 
@@ -32,34 +32,33 @@ namespace WeatherClient
 
         private void GetWeatherButton_Click(object sender, RoutedEventArgs e)
         {
-
             if (!_cache.Contains(CityName.Text))
             {
                // var currentResult = _weatherService.GetCurrentWeather(CityName.Text);
                // var foreCustRes = _weatherService.GetForeCustWeather(CityName.Text);
-                var weather = _weatherService.GetWeather(CityName.Text);
-                var item = new CacheItem(CityName.Text, weather);
+                var weatherService = new WeatherServiceClient();
+                ResultForecust = weatherService.GetWeather(CityName.Text); ;
+                //var item = new CacheItem(CityName.Text, ResultForecust);
                 var policy = new CacheItemPolicy {AbsoluteExpiration = DateTimeOffset.MaxValue};
-                _cache.Add(item.Key, item, policy);
+                _cache.Add(CityName.Text, ResultForecust, policy);               
             }
             else
             {
-                var currentResult = _cache.Where(x => x.Key == CityName.Text);
-                
-                
+                var item = _cache.GetCacheItem(CityName.Text);
+                if (item == null) return;
+                var cacheItem = item.Value;
+                    ResultForecust = (WeatherForecust) cacheItem;
             }
-            
-
-        }
-
-        private void PopulateResult(WeatherForecust weather)
-        {
-            var dataGridTemperatureColumn = CurrenWeatherDataGrid.Columns;
-            DataGridViewCell cell = new DataGridViewTextBoxCell();
-            
+          //  WeatherForeCustDataGrid.ItemsSource = ResultForecust.CurrentWeather;
+            WeatherForeCustDataGrid.ItemsSource = ResultForecust.Forecast;
         }
 
         private void DataGrid_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+
+        }
+
+        private void CurrenWeatherDataGrid_AddingNewItem(object sender, AddingNewItemEventArgs e)
         {
 
         }

@@ -7,8 +7,8 @@
     <ProjectGuid>{1F059A22-9C15-4AEB-9EED-CAB9A168C22C}</ProjectGuid>
     <OutputType>Exe</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>Lesson13</RootNamespace>
-    <AssemblyName>Lesson13</AssemblyName>
+    <RootNamespace>WeatherService</RootNamespace>
+    <AssemblyName>WeatherService</AssemblyName>
     <TargetFrameworkVersion>v4.5.2</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
     <AutoGenerateBindingRedirects>true</AutoGenerateBindingRedirects>
