@@ -1,16 +1,16 @@
-﻿using Lesson13;
+﻿using WeatherService;
 using System;
 using System.ServiceModel;
 using System.ServiceModel.Description;
 
-namespace lesson13
+namespace WeatherService
 {
     class Program
     {
         static void Main(string[] args)
         {
-            WeatherService w = new WeatherService();
-          //  var FcResult = w.GetForeCustWeather("Kiev");
+            var w = new WeatherService();
+           //  var FcResult = w.GetForeCustWeather("Kiev");
            // var CurrentResult = w.GetCurrentWeather("Kiev");
             CreateService();
             Console.ReadLine();

@@ -15,15 +15,18 @@ namespace WeatherClient.ForecustWeatherServiceReference {
     
     [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Runtime.Serialization", "4.0.0.0")]
-    [System.Runtime.Serialization.DataContractAttribute(Name="WeatherForcust", Namespace="http://schemas.datacontract.org/2004/07/Lesson13")]
+    [System.Runtime.Serialization.DataContractAttribute(Name="WeatherForecust", Namespace="http://schemas.datacontract.org/2004/07/Lesson13")]
     [System.SerializableAttribute()]
-    public partial class WeatherForcust : object, System.Runtime.Serialization.IExtensibleDataObject, System.ComponentModel.INotifyPropertyChanged {
+    public partial class WeatherForecust : object, System.Runtime.Serialization.IExtensibleDataObject, System.ComponentModel.INotifyPropertyChanged {
         
         [System.NonSerializedAttribute()]
         private System.Runtime.Serialization.ExtensionDataObject extensionDataField;
         
         [System.Runtime.Serialization.OptionalFieldAttribute()]
         private string CityNameField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private WeatherClient.ForecustWeatherServiceReference.ForeCast CurrentWeatherField;
         
         [System.Runtime.Serialization.OptionalFieldAttribute()]
         private WeatherClient.ForecustWeatherServiceReference.ForeCast[] ForecastField;
@@ -47,6 +50,19 @@ namespace WeatherClient.ForecustWeatherServiceReference {
                 if ((object.ReferenceEquals(this.CityNameField, value) != true)) {
                     this.CityNameField = value;
                     this.RaisePropertyChanged("CityName");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public WeatherClient.ForecustWeatherServiceReference.ForeCast CurrentWeather {
+            get {
+                return this.CurrentWeatherField;
+            }
+            set {
+                if ((object.ReferenceEquals(this.CurrentWeatherField, value) != true)) {
+                    this.CurrentWeatherField = value;
+                    this.RaisePropertyChanged("CurrentWeather");
                 }
             }
         }
@@ -337,21 +353,88 @@ namespace WeatherClient.ForecustWeatherServiceReference {
         }
     }
     
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Runtime.Serialization", "4.0.0.0")]
+    [System.Runtime.Serialization.DataContractAttribute(Name="ForcustItem", Namespace="http://schemas.datacontract.org/2004/07/Lesson13")]
+    [System.SerializableAttribute()]
+    public partial class ForcustItem : object, System.Runtime.Serialization.IExtensibleDataObject, System.ComponentModel.INotifyPropertyChanged {
+        
+        [System.NonSerializedAttribute()]
+        private System.Runtime.Serialization.ExtensionDataObject extensionDataField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private string CityNameField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private WeatherClient.ForecustWeatherServiceReference.ForeCast[] ForecastField;
+        
+        [global::System.ComponentModel.BrowsableAttribute(false)]
+        public System.Runtime.Serialization.ExtensionDataObject ExtensionData {
+            get {
+                return this.extensionDataField;
+            }
+            set {
+                this.extensionDataField = value;
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public string CityName {
+            get {
+                return this.CityNameField;
+            }
+            set {
+                if ((object.ReferenceEquals(this.CityNameField, value) != true)) {
+                    this.CityNameField = value;
+                    this.RaisePropertyChanged("CityName");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public WeatherClient.ForecustWeatherServiceReference.ForeCast[] Forecast {
+            get {
+                return this.ForecastField;
+            }
+            set {
+                if ((object.ReferenceEquals(this.ForecastField, value) != true)) {
+                    this.ForecastField = value;
+                    this.RaisePropertyChanged("Forecast");
+                }
+            }
+        }
+        
+        public event System.ComponentModel.PropertyChangedEventHandler PropertyChanged;
+        
+        protected void RaisePropertyChanged(string propertyName) {
+            System.ComponentModel.PropertyChangedEventHandler propertyChanged = this.PropertyChanged;
+            if ((propertyChanged != null)) {
+                propertyChanged(this, new System.ComponentModel.PropertyChangedEventArgs(propertyName));
+            }
+        }
+    }
+    
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
     [System.ServiceModel.ServiceContractAttribute(ConfigurationName="ForecustWeatherServiceReference.IWeatherService")]
     public interface IWeatherService {
         
-        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IWeatherService/GetCurrentWeather", ReplyAction="http://tempuri.org/IWeatherService/GetCurrentWeatherResponse")]
-        WeatherClient.ForecustWeatherServiceReference.WeatherForcust GetCurrentWeather(string city);
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IWeatherService/GetWeather", ReplyAction="http://tempuri.org/IWeatherService/GetWeatherResponse")]
+        WeatherClient.ForecustWeatherServiceReference.WeatherForecust GetWeather(string city);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IWeatherService/GetWeather", ReplyAction="http://tempuri.org/IWeatherService/GetWeatherResponse")]
+        System.Threading.Tasks.Task<WeatherClient.ForecustWeatherServiceReference.WeatherForecust> GetWeatherAsync(string city);
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IWeatherService/GetCurrentWeather", ReplyAction="http://tempuri.org/IWeatherService/GetCurrentWeatherResponse")]
-        System.Threading.Tasks.Task<WeatherClient.ForecustWeatherServiceReference.WeatherForcust> GetCurrentWeatherAsync(string city);
+        WeatherClient.ForecustWeatherServiceReference.ForcustItem GetCurrentWeather(string city);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IWeatherService/GetCurrentWeather", ReplyAction="http://tempuri.org/IWeatherService/GetCurrentWeatherResponse")]
+        System.Threading.Tasks.Task<WeatherClient.ForecustWeatherServiceReference.ForcustItem> GetCurrentWeatherAsync(string city);
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IWeatherService/GetForeCustWeather", ReplyAction="http://tempuri.org/IWeatherService/GetForeCustWeatherResponse")]
-        WeatherClient.ForecustWeatherServiceReference.WeatherForcust GetForeCustWeather(string city);
+        WeatherClient.ForecustWeatherServiceReference.ForcustItem GetForeCustWeather(string city);
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IWeatherService/GetForeCustWeather", ReplyAction="http://tempuri.org/IWeatherService/GetForeCustWeatherResponse")]
-        System.Threading.Tasks.Task<WeatherClient.ForecustWeatherServiceReference.WeatherForcust> GetForeCustWeatherAsync(string city);
+        System.Threading.Tasks.Task<WeatherClient.ForecustWeatherServiceReference.ForcustItem> GetForeCustWeatherAsync(string city);
     }
     
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
@@ -381,19 +464,27 @@ namespace WeatherClient.ForecustWeatherServiceReference {
                 base(binding, remoteAddress) {
         }
         
-        public WeatherClient.ForecustWeatherServiceReference.WeatherForcust GetCurrentWeather(string city) {
+        public WeatherClient.ForecustWeatherServiceReference.WeatherForecust GetWeather(string city) {
+            return base.Channel.GetWeather(city);
+        }
+        
+        public System.Threading.Tasks.Task<WeatherClient.ForecustWeatherServiceReference.WeatherForecust> GetWeatherAsync(string city) {
+            return base.Channel.GetWeatherAsync(city);
+        }
+        
+        public WeatherClient.ForecustWeatherServiceReference.ForcustItem GetCurrentWeather(string city) {
             return base.Channel.GetCurrentWeather(city);
         }
         
-        public System.Threading.Tasks.Task<WeatherClient.ForecustWeatherServiceReference.WeatherForcust> GetCurrentWeatherAsync(string city) {
+        public System.Threading.Tasks.Task<WeatherClient.ForecustWeatherServiceReference.ForcustItem> GetCurrentWeatherAsync(string city) {
             return base.Channel.GetCurrentWeatherAsync(city);
         }
         
-        public WeatherClient.ForecustWeatherServiceReference.WeatherForcust GetForeCustWeather(string city) {
+        public WeatherClient.ForecustWeatherServiceReference.ForcustItem GetForeCustWeather(string city) {
             return base.Channel.GetForeCustWeather(city);
         }
         
-        public System.Threading.Tasks.Task<WeatherClient.ForecustWeatherServiceReference.WeatherForcust> GetForeCustWeatherAsync(string city) {
+        public System.Threading.Tasks.Task<WeatherClient.ForecustWeatherServiceReference.ForcustItem> GetForeCustWeatherAsync(string city) {
             return base.Channel.GetForeCustWeatherAsync(city);
         }
     }

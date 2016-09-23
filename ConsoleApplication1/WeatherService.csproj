@@ -64,10 +64,11 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="ForeCast.cs" />
     <Compile Include="IWeatherService.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="WeatherForcust.cs" />
+    <Compile Include="ForcustItem.cs" />
     <Compile Include="WeatherService.cs" />
   </ItemGroup>
   <ItemGroup>

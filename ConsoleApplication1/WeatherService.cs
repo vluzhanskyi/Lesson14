@@ -8,14 +8,26 @@ using System.Text;
 using System.Xml;
 using System.Xml.Linq;
 
-namespace Lesson13
+namespace WeatherService
 {
     // NOTE: You can use the "Rename" command on the "Refactor" menu to change the class name "WeatherService" in both code and config file together.
     public class WeatherService : IWeatherService
     {
         private const string AppId = "0949ad752887b4deeaf01429a455e7ed";
 
-        public WeatherForcust GetCurrentWeather(string city)
+        public WeatherForecust GetWeather(string city)
+        {
+            var temp = GetCurrentWeather(city);
+            var result = new WeatherForecust
+            {
+                CurrentWeather = temp.Forecast.First(),
+                CityName = temp.CityName,
+                Forecast = GetForeCustWeather(city).Forecast
+            };
+            return result;
+        }
+
+        public ForcustItem GetCurrentWeather(string city)
         {
             string url =
                 string.Format("http://api.openweathermap.org/data/2.5/weather?q={0}&APPID={1}&mode=xml&units=metric",
@@ -27,7 +39,7 @@ namespace Lesson13
             return result;
         }
 
-        public WeatherForcust GetForeCustWeather(string city)
+        public ForcustItem GetForeCustWeather(string city)
         {
             string url =
                 string.Format("http://api.openweathermap.org/data/2.5/forecast?q={0}&APPID={1}&mode=xml&units=metric",
@@ -39,9 +51,9 @@ namespace Lesson13
             return result;
         }
 
-        private WeatherForcust GetCurrentWeatherfromXml(XmlNode data)
+        private ForcustItem GetCurrentWeatherfromXml(XmlNode data)
         {
-            WeatherForcust result = new WeatherForcust();
+            ForcustItem result = new ForcustItem();
             XDocument doc = XDocument.Parse(data.OuterXml);
 
             if (doc.Root == null) return result;
@@ -69,7 +81,7 @@ namespace Lesson13
             var precipitationType = sPrecipitationType;
                   
             var date = Convert.ToDateTime(sDate);
-            //=================================/ Add Data to WeatherForcust object  /======================================
+            //=================================/ Add Data to ForcustItem object  /======================================
             result.CityName = city.ElementAt(0).Value;
             var temData = new Data()
             {
@@ -98,9 +110,9 @@ namespace Lesson13
          return result;
         }
 
-        private WeatherForcust SerializeWeatherData(XmlNode data)
+        private ForcustItem SerializeWeatherData(XmlNode data)
         {
-            WeatherForcust result = new WeatherForcust();
+            ForcustItem result = new ForcustItem();
             XDocument doc = XDocument.Parse(data.OuterXml);
             if (doc.Root == null) return result;
             result.CityName = doc.Root.Elements().Select(x => x.Element("name")).ElementAt(0).Value;

@@ -6,15 +6,18 @@ using System.ServiceModel;
 using System.Text;
 using System.Xml;
 
-namespace Lesson13
+namespace WeatherService
 {
     // NOTE: You can use the "Rename" command on the "Refactor" menu to change the interface name "IWeatherService" in both code and config file together.
     [ServiceContract]
     public interface IWeatherService
     {
         [OperationContract]
-        WeatherForcust GetCurrentWeather(string city);
+        WeatherForecust GetWeather(string city);
         [OperationContract]
-        WeatherForcust GetForeCustWeather(string city);
+        ForcustItem GetCurrentWeather(string city);
+        [OperationContract]
+        ForcustItem GetForeCustWeather(string city);
+
     }
 }

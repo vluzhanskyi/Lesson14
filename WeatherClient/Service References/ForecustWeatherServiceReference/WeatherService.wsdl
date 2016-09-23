@@ -7,6 +7,12 @@
       <xsd:import schemaLocation="http://localhost:8585/Weather?xsd=xsd2" namespace="http://schemas.datacontract.org/2004/07/Lesson13" />
     </xsd:schema>
   </wsdl:types>
+  <wsdl:message name="IWeatherService_GetWeather_InputMessage">
+    <wsdl:part name="parameters" element="tns:GetWeather" />
+  </wsdl:message>
+  <wsdl:message name="IWeatherService_GetWeather_OutputMessage">
+    <wsdl:part name="parameters" element="tns:GetWeatherResponse" />
+  </wsdl:message>
   <wsdl:message name="IWeatherService_GetCurrentWeather_InputMessage">
     <wsdl:part name="parameters" element="tns:GetCurrentWeather" />
   </wsdl:message>
@@ -20,6 +26,10 @@
     <wsdl:part name="parameters" element="tns:GetForeCustWeatherResponse" />
   </wsdl:message>
   <wsdl:portType name="IWeatherService">
+    <wsdl:operation name="GetWeather">
+      <wsdl:input wsaw:Action="http://tempuri.org/IWeatherService/GetWeather" message="tns:IWeatherService_GetWeather_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IWeatherService/GetWeatherResponse" message="tns:IWeatherService_GetWeather_OutputMessage" />
+    </wsdl:operation>
     <wsdl:operation name="GetCurrentWeather">
       <wsdl:input wsaw:Action="http://tempuri.org/IWeatherService/GetCurrentWeather" message="tns:IWeatherService_GetCurrentWeather_InputMessage" />
       <wsdl:output wsaw:Action="http://tempuri.org/IWeatherService/GetCurrentWeatherResponse" message="tns:IWeatherService_GetCurrentWeather_OutputMessage" />
@@ -31,6 +41,15 @@
   </wsdl:portType>
   <wsdl:binding name="BasicHttpBinding_IWeatherService" type="tns:IWeatherService">
     <soap:binding transport="http://schemas.xmlsoap.org/soap/http" />
+    <wsdl:operation name="GetWeather">
+      <soap:operation soapAction="http://tempuri.org/IWeatherService/GetWeather" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
     <wsdl:operation name="GetCurrentWeather">
       <soap:operation soapAction="http://tempuri.org/IWeatherService/GetCurrentWeather" style="document" />
       <wsdl:input>

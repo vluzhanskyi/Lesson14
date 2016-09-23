@@ -1,7 +1,10 @@
-﻿using System.Collections.Specialized;
+﻿using System;
+using System.Collections.Specialized;
+using System.Linq;
 using System.Runtime.Caching;
 using System.Windows;
 using System.Windows.Controls;
+using System.Windows.Forms;
 using WeatherClient.ForecustWeatherServiceReference;
 
 namespace WeatherClient
@@ -11,9 +14,13 @@ namespace WeatherClient
     /// </summary>
     public partial class MainWindow : Window
     {
+        private readonly IWeatherService _weatherService;
+        private readonly MemoryCache _cache;
         public MainWindow()
         {
             InitializeComponent();
+            _weatherService = new WeatherServiceClient();
+            _cache = new MemoryCache("test", new NameValueCollection());
         }
 
         private void TextBox_TextChanged(object sender, TextChangedEventArgs e)
@@ -24,16 +31,37 @@ namespace WeatherClient
         }
 
         private void GetWeatherButton_Click(object sender, RoutedEventArgs e)
-        {          
-            IWeatherService weatherService = new WeatherServiceClient();
-            var currentResult = weatherService.GetCurrentWeather(CityName.Text);
-            var foreCustRes = weatherService.GetForeCustWeather(CityName.Text);
-            var cache = new MemoryCache(CityName.Text, new NameValueCollection());
-            var item = new CacheItem("current", currentResult);
-            var item2 = new CacheItem("forecast", foreCustRes);
-            var policy = new CacheItemPolicy();
-            cache.Add(item, policy);
-            cache.Add(item2, policy);
+        {
+
+            if (!_cache.Contains(CityName.Text))
+            {
+               // var currentResult = _weatherService.GetCurrentWeather(CityName.Text);
+               // var foreCustRes = _weatherService.GetForeCustWeather(CityName.Text);
+                var weather = _weatherService.GetWeather(CityName.Text);
+                var item = new CacheItem(CityName.Text, weather);
+                var policy = new CacheItemPolicy {AbsoluteExpiration = DateTimeOffset.MaxValue};
+                _cache.Add(item.Key, item, policy);
+            }
+            else
+            {
+                var currentResult = _cache.Where(x => x.Key == CityName.Text);
+                
+                
+            }
+            
+
+        }
+
+        private void PopulateResult(WeatherForecust weather)
+        {
+            var dataGridTemperatureColumn = CurrenWeatherDataGrid.Columns;
+            DataGridViewCell cell = new DataGridViewTextBoxCell();
+            
+        }
+
+        private void DataGrid_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+
         }
     }
 }

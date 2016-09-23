@@ -76,7 +76,10 @@
     <None Include="Service References\ForecustWeatherServiceReference\Weather2.xsd">
       <SubType>Designer</SubType>
     </None>
-    <None Include="Service References\ForecustWeatherServiceReference\WeatherClient.ForecustWeatherServiceReference.WeatherForcust.datasource">
+    <None Include="Service References\ForecustWeatherServiceReference\WeatherClient.ForecustWeatherServiceReference.ForcustItem.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
+    <None Include="Service References\ForecustWeatherServiceReference\WeatherClient.ForecustWeatherServiceReference.WeatherForecust.datasource">
       <DependentUpon>Reference.svcmap</DependentUpon>
     </None>
     <None Include="Service References\ForecustWeatherServiceReference\WeatherService.wsdl" />

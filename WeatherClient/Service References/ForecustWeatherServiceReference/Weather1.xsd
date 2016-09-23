@@ -1,6 +1,20 @@
 <?xml version="1.0" encoding="utf-8"?>
 <xs:schema xmlns:tns="http://tempuri.org/" elementFormDefault="qualified" targetNamespace="http://tempuri.org/" xmlns:xs="http://www.w3.org/2001/XMLSchema">
   <xs:import schemaLocation="http://localhost:8585/Weather?xsd=xsd2" namespace="http://schemas.datacontract.org/2004/07/Lesson13" />
+  <xs:element name="GetWeather">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element minOccurs="0" name="city" nillable="true" type="xs:string" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="GetWeatherResponse">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element xmlns:q1="http://schemas.datacontract.org/2004/07/Lesson13" minOccurs="0" name="GetWeatherResult" nillable="true" type="q1:WeatherForecust" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
   <xs:element name="GetCurrentWeather">
     <xs:complexType>
       <xs:sequence>
@@ -11,7 +25,7 @@
   <xs:element name="GetCurrentWeatherResponse">
     <xs:complexType>
       <xs:sequence>
-        <xs:element xmlns:q1="http://schemas.datacontract.org/2004/07/Lesson13" minOccurs="0" name="GetCurrentWeatherResult" nillable="true" type="q1:WeatherForcust" />
+        <xs:element xmlns:q2="http://schemas.datacontract.org/2004/07/Lesson13" minOccurs="0" name="GetCurrentWeatherResult" nillable="true" type="q2:ForcustItem" />
       </xs:sequence>
     </xs:complexType>
   </xs:element>
@@ -25,7 +39,7 @@
   <xs:element name="GetForeCustWeatherResponse">
     <xs:complexType>
       <xs:sequence>
-        <xs:element xmlns:q2="http://schemas.datacontract.org/2004/07/Lesson13" minOccurs="0" name="GetForeCustWeatherResult" nillable="true" type="q2:WeatherForcust" />
+        <xs:element xmlns:q3="http://schemas.datacontract.org/2004/07/Lesson13" minOccurs="0" name="GetForeCustWeatherResult" nillable="true" type="q3:ForcustItem" />
       </xs:sequence>
     </xs:complexType>
   </xs:element>

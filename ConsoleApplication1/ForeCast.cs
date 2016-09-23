@@ -1,21 +1,11 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Runtime.Serialization;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Lesson13
+namespace WeatherService
 {
-    [DataContract]
-   public class WeatherForcust
-    {
-        [DataMember]
-        public string CityName { set; get; }
-        [DataMember]
-        public List<ForeCast> Forecast = new List<ForeCast>();
-    }
-
     public class ForeCast
     {
         public Precipitation Precipitation = new Precipitation();
