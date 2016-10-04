@@ -9,9 +9,9 @@ namespace WeatherService
     {
         static void Main(string[] args)
         {
-            var w = new WeatherService();
-             var FcResult = w.GetForeCustWeather("Kiev");
-            var CurrentResult = w.GetCurrentWeather("Kiev");
+            //var w = new WeatherService();
+            //var FcResult = w.GetForeCustWeather("Kiev");
+            //var CurrentResult = w.GetCurrentWeather("Kiev");
             CreateService();
             Console.ReadLine();
         }

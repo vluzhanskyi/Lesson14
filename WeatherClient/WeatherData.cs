@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace WeatherService
 {
-    public class WeatherData
+    public struct WeatherData
     {
         public DateTime DataFrom { set; get; }
         public DateTime DataTo { set; get; }
