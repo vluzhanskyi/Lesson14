@@ -17,6 +17,7 @@ namespace WeatherClient
     /// </summary>
     public partial class MainWindow : Window
     {
+        string City { set; get; }
         ViewModel Model = new ViewModel();
         public MainWindow()
         {
@@ -24,23 +25,18 @@ namespace WeatherClient
         }
 
         private void TextBox_TextChanged(object sender, TextChangedEventArgs e)
-        {
-            Model.CityName = CityName.Text;
+        {   
+            City = CityName.Text;
         }
 
         private void GetWeatherButton_Click(object sender, RoutedEventArgs e)
         {
-            Model.GetWeather();
-        }     
-
-        private void DataGrid_SelectionChanged(object sender, SelectionChangedEventArgs e)
-        {
-            
-        }
-
-        private void CurrenWeatherDataGrid_AddingNewItem(object sender, AddingNewItemEventArgs e)
-        {
-
+            if (City != string.Empty)
+            {
+                Model.GetWeather(City);
+                WeatherForeCustDataGrid.ItemsSource = Model.WeatherForeCust;
+                CurrenWeatherDataGrid.ItemsSource = Model.CurrenWeather;
+            }
         }
     }
 }

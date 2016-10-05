@@ -13,15 +13,14 @@ namespace WeatherClient
 {
     public class ViewModel
     {
-        public string CityName { set; get; }
-        public WeatherForecust ResultForecust { set; get; }
-        public static List<WeatherData> CurrenWeather { get; private set; }
-        public static List<WeatherData> WeatherForeCust { get; private set; }
+        private WeatherForecust ResultForecust { get; set; }
+        public List<WeatherData> CurrenWeather { get; private set; }
+        public List<WeatherData> WeatherForeCust { get; private set; }
 
-        private readonly MemoryCache _cache;
+        private MemoryCache _cache;
         public ViewModel()
         {
-            _cache = new MemoryCache("test", new NameValueCollection());
+            _cache = new MemoryCache("WeatherCache", new NameValueCollection());
         }
 
         private List<WeatherData> CollectWeatherData(ForeCast[] forecust)
@@ -41,10 +40,11 @@ namespace WeatherClient
                 data.Temperature = item.Temperature;
                 result.Add(data);
             }
+
             return result;
         }
 
-        public void GetWeather()
+        public void GetWeather(string CityName)
         {
             if (_cache.Contains(CityName))
             {
@@ -67,8 +67,8 @@ namespace WeatherClient
             }
             CurrenWeather = CollectWeatherData(ResultForecust.CurrentWeather);
             WeatherForeCust = CollectWeatherData(ResultForecust.Forecast);
+
         }
 
-      //  public event TextChangedEventArgs CityNameChanged;
     }
 }
