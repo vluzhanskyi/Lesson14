@@ -6,24 +6,28 @@ using System.Runtime.Caching;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Controls;
+using System.Windows.Input;
 using WeatherClient.ForecustWeatherServiceReference;
 using WeatherService;
 
-namespace WeatherClient 
+namespace WeatherClient
 {
-    public class ViewModel
+    public class ClientWeatherData
     {
         private WeatherForecust ResultForecust { get; set; }
+        public string City { set; get; }
         public List<WeatherData> CurrenWeather { get; private set; }
         public List<WeatherData> WeatherForeCust { get; private set; }
 
-        private MemoryCache _cache;
-        public ViewModel()
+        private static MemoryCache _cache;
+        public ClientWeatherData()
         {
+            CurrenWeather = new List<WeatherData>();
+            WeatherForeCust = new List<WeatherData>();
             _cache = new MemoryCache("WeatherCache", new NameValueCollection());
         }
 
-        private List<WeatherData> CollectWeatherData(ForeCast[] forecust)
+        private static List<WeatherData> CollectWeatherData(ForeCast[] forecust)
         {
             var result = new List<WeatherData>();
             foreach (var item in forecust)
@@ -44,31 +48,26 @@ namespace WeatherClient
             return result;
         }
 
-        public void GetWeather(string CityName)
+        public void GetWeather()
         {
-            if (_cache.Contains(CityName))
+            if (!_cache.Contains(City))
             {
-                var cacheItem = (WeatherForecust)_cache.GetCacheItem(CityName, null).Value;
-
-                if (cacheItem.CurrentWeather[0].Data.From.AddHours(3) > DateTime.Now)
-                {
-                    // var currentResult = _weatherService.GetCurrentWeather(CityName.Text);
-                    // var foreCustRes = _weatherService.GetForeCustWeather(CityName.Text);
-                    ResultForecust = cacheItem;
-                }
+                var weatherService = new WeatherServiceClient();
+                ResultForecust = weatherService.GetWeather(City);
+                var policy = new CacheItemPolicy { AbsoluteExpiration = DateTimeOffset.MaxValue };
+                _cache.Add(City, ResultForecust, policy);
             }
             else
             {
-                var weatherService = new WeatherServiceClient();
-                ResultForecust = weatherService.GetWeather(CityName); ;
-                //var item = new CacheItem(CityName.Text, ResultForecust);
-                var policy = new CacheItemPolicy { AbsoluteExpiration = DateTimeOffset.MaxValue };
-                _cache.Add(CityName, ResultForecust, policy);               
+                var cacheItem = (WeatherForecust)_cache.GetCacheItem(City, null).Value;
+
+                if (cacheItem.CurrentWeather[0].Data.From.AddHours(3) > DateTime.Now)
+                {
+                    ResultForecust = cacheItem;
+                }
             }
             CurrenWeather = CollectWeatherData(ResultForecust.CurrentWeather);
             WeatherForeCust = CollectWeatherData(ResultForecust.Forecast);
-
         }
-
     }
 }

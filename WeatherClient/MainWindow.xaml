@@ -2,24 +2,24 @@
         xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:local="clr-namespace:WeatherClient" x:Class="WeatherClient.MainWindow"
-        xmlns:vm="clr-namespace:WeatherClient.ForecustWeatherServiceReference"
-        Title="WeatherClient" Height="457" Width="885">
+        xmlns:weaths= "clr-namespace:WeatherClient.MVVM" 
+        Title="WeatherClient" Height="457" Width="950">
+    <Window.Resources>
+        <weaths:WeatherViewModel x:Key="view" />
+        <ObjectDataProvider ObjectType="{x:Type weaths:WeatherViewModel}" x:Key="comm" />
+    </Window.Resources>
     <Grid Margin="0,0,-8,23" RenderTransformOrigin="0.502,0.508">
-        <Grid.ColumnDefinitions>
-            <ColumnDefinition Width="98*"/>
-            <ColumnDefinition Width="0*"/>
-            <ColumnDefinition Width="79*"/>
-            <ColumnDefinition Width="0*"/>
-        </Grid.ColumnDefinitions>
-        <TextBox x:Name="CityName" HorizontalAlignment="Left" Height="23" Margin="11,10,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="771" TextChanged="TextBox_TextChanged" Grid.ColumnSpan="3"/>
-        <Button x:Name="GetWeatherButton" Visibility="Visible" Content="GetWeather" HorizontalAlignment="Left" Margin="297,10,0,0" VerticalAlignment="Top" Width="75" Click="GetWeatherButton_Click" Height="22" Grid.ColumnSpan="2" Grid.Column="1"/>
-        <DataGrid x:Name="CurrenWeatherDataGrid" HorizontalAlignment="Left" Margin="11,45,0,0" VerticalAlignment="Top" Height="43" Width="851" Grid.ColumnSpan="3"
-                  Grid.Column="0" >
+        <TextBox x:Name="CityName" HorizontalAlignment="Left" Height="23" Margin="11,10,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="552" 
+                  Grid.ColumnSpan="1" Text="{Binding CityName}" DataContext="{StaticResource comm}" ToolTip="Enter City Name to get Weather in the City"/>
+        <Button x:Name="GetWeatherButton" Visibility="Visible" Content="GetWeather" HorizontalAlignment="Left" Margin="589,10,0,0" VerticalAlignment="Top" Width="75" 
+                Height="22" DataContext="{StaticResource comm}" Command="{Binding GetButton}"/>
+        <DataGrid x:Name="CurrenWeatherDataGrid" HorizontalAlignment="Left" Margin="11,45,0,0" VerticalAlignment="Top" Height="auto" Width="auto" Grid.ColumnSpan="3"
+                  Grid.Column="0" DataContext="{StaticResource comm}" ItemsSource="{Binding CurrentWeather, UpdateSourceTrigger=PropertyChanged}" >
             <DataGrid.Columns>
             </DataGrid.Columns>
         </DataGrid>
-        <DataGrid x:Name="WeatherForeCustDataGrid" HorizontalAlignment="Left" Margin="11,106,0,0" VerticalAlignment="Top" Height="297" Width="851"
-                  Grid.ColumnSpan="3">
+        <DataGrid x:Name="WeatherForeCustDataGrid" HorizontalAlignment="Left" Margin="11,106,0,0" VerticalAlignment="Top" Height="297" Width="auto"
+                  Grid.ColumnSpan="3" DataContext="{StaticResource comm}" ItemsSource="{Binding WeatherForecust, UpdateSourceTrigger=PropertyChanged}">
             <DataGrid.Columns>
             </DataGrid.Columns>
         </DataGrid>
