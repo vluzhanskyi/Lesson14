@@ -72,7 +72,7 @@ namespace WeatherClient.MVVM
                 {
                     data.GetWeather();
                     UpdateResults();
-                }));
+                } ));
             }
         }
     }
